@@ -23,28 +23,62 @@ fetch(url)
 
   });
 
+ 
+  let form = document.getElementById("form");
+  form.addEventListener("submit", getSearchBarValue)
+  console.log(form)
   
+ 
   
-  console.log(cityButtons)
-  for (let i = 0; i < cityButtons.length; i++) {
-    let allCityButtons = cityButtons[i];
-    
-    allCityButtons.addEventListener("click", function(event){
-     getCity(event) 
+function getSearchBarValue(event) {
+  event.preventDefault();
+  let searchCityItem = document.getElementById("search").value;
+  let cityText = document.createTextNode(searchCityItem);
+  let searchCityDiv = document.createElement('div');
+  let searchCityHeader = document.createElement("h1");
+  let cityContainer = document.getElementById("cityBox");
 
-
-  })
-
-  }; 
+  searchCityDiv.id = searchCityItem;
+  searchCityHeader.id = "headerId"
   
-  function getCity(event) {
-    console.log(event)
-    let city = event.target.getAttribute("data-city");
+  cityContainer.appendChild(searchCityDiv);
+  searchCityDiv.appendChild(searchCityHeader)
+  searchCityHeader.appendChild(cityText)
+  
 
-    console.log(city);
 
-
+  console.log(searchCityItem)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+//   // grabbing city names from the side bar 
+//   console.log(cityButtons)
+//   for (let i = 0; i < cityButtons.length; i++) {
+//     let allCityButtons = cityButtons[i];
+//      allCityButtons.addEventListener("click", function(event){
+//      getCity(event) 
+//   })
+
+//   }; 
+  
+//   function getCity(event) {
+//     let city = event.target.getAttribute("data-city");
+// }
   
    
        
