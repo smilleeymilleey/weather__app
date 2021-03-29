@@ -7,14 +7,11 @@ let selectedCityWindEl = document.getElementById("wind__Placeholder");
 let selectedCityUvEl = document.getElementById("UV__Placeholder");
 let cityButtons = document.getElementsByClassName("city");
 let selectedCityNameEl = document.getElementById("city__Placeholder");
-
-
-
 const apiKey = "a2f6fce88cfc4a69918f36922a1be74b";
 
 
 
-
+// api used to get weather information based on the city
 
 async function getWeatherData(city){
   const url = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=' + apiKey;
@@ -33,7 +30,8 @@ async function getWeatherData(city){
     getWeeklyForecast(lat,lon);
   });
 }
-// api to get weekly forecast is located below
+
+// api to get weekly forecast information and uv index 
 
 async function getWeeklyForecast(lat, lon){
   const url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + apiKey;
@@ -49,12 +47,14 @@ async function getWeeklyForecast(lat, lon){
     accessWeatherData(data);
     });
 }
-// click event for search bar 
+
+// Grabbing the value from the search bar to compare api information with 
+
   let form = document.getElementById("form");
   form.addEventListener("submit", getSearchBarValue)
   console.log(form)
   
-// get value from user input
+
   
 function getSearchBarValue(event) {
   event.preventDefault();
@@ -74,24 +74,18 @@ function getSearchBarValue(event) {
   getWeatherData(searchCityItem);
 }
 
-// use api to get specific data and display to html
+
 
 function accessWeatherData(data) {
-  // getting name data and displaying 
-// //  let nameValue = data.city.name 
-//  let nameText = document.createTextNode(nameValue)
-//  let addHeaderToDiv = selectedCityEl[0].appendChild(selectedCityNameEl)
-  
-//  addHeaderToDiv.appendChild(nameText);
 
-  // getting Temperature data ~for the day~ and displaying 
+// getting Temperature data ~for the day~ and display on top card
  let tempValue = data.current.temp 
  let tempText = document.createTextNode(tempValue)
  let addTempToDiv = selectedCityEl[0].appendChild(selectedCityTempEl)
 
   addTempToDiv.appendChild(tempText)
 
-  // getting wind speed ~for the day~ and displaying 
+// getting wind speed ~for the day~ and display on top card
 
  let windValue = data.current.wind_speed
  let windText = document.createTextNode(windValue)
@@ -99,11 +93,14 @@ function accessWeatherData(data) {
   
   addWindToDiv.appendChild(windText)
 
-  //getting UV Index ~for that day~ and displaying 
+//getting UV Index ~for that day~ and display on top card
+
     let uv = data.current.uvi;
     let uvText = document.createTextNode(uv)
     selectedCityUvEl.appendChild(uvText);
-  // looping through the api for list 
+
+
+// looping through the api to list and display the current day, time, temperature, and humidity for the weekly forcast 
 
   for (let i = 0; i < 5; i++) {
     let forecastTempValue = data.daily[i].temp.day;
@@ -119,13 +116,6 @@ function accessWeatherData(data) {
     cardTemp.textContent = "Temp(F): " + forecastTempValue;
     cardHumidity.textContent = "Humidity: " + humidity;
 
-
-
-
-
-    console.log(cardHumidity);
-
-  
   }
  
 }
