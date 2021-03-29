@@ -54,31 +54,55 @@ async function getWeeklyForecast(lat, lon){
   form.addEventListener("submit", getSearchBarValue)
   console.log(form)
   
-
   
-function getSearchBarValue(event) {
-  event.preventDefault();
-  let searchCityItem = document.getElementById("search").value;
-  let cityText = document.createTextNode(searchCityItem);
-  let searchCityDiv = document.createElement('div');
-  let searchCityHeader = document.createElement("h1");
-  let cityContainer = document.getElementById("cityBox");
-
-  searchCityDiv.id = searchCityItem;
-  searchCityHeader.id = "headerId"
   
-  cityContainer.appendChild(searchCityDiv);
-  searchCityDiv.appendChild(searchCityHeader)
-  searchCityHeader.appendChild(cityText)
+  function getSearchBarValue(event) {
+    event.preventDefault();
+    let searchCityItem = document.getElementById("search").value;
+    let cityText = document.createTextNode(searchCityItem);
+    let searchCityDiv = document.createElement('div');
+    let searchCityHeader = document.createElement("h1");
+    let cityContainer = document.getElementById("cityBox");
+    
+    searchCityDiv.id = searchCityItem;
+    searchCityHeader.id = "headerId"
+    
+    cityContainer.appendChild(searchCityDiv);
+    searchCityDiv.appendChild(searchCityHeader)
+    searchCityHeader.appendChild(cityText)
+    
+    let city = JSON.parse(localStorage.getItem("city")) || [];
+    city.push(searchCityItem);
+    localStorage.setItem("city", JSON.stringify(city));
+    
+    getWeatherData(searchCityItem);
+  }
+  
 
-  getWeatherData(searchCityItem);
-}
 
-
-
-function accessWeatherData(data) {
-
-// getting Temperature data ~for the day~ and display on top card
+  let cities = JSON.parse(localStorage.getItem("city")) || [];
+  for (let i = 0; i < cities.length; i++) {
+    const searchCityItem = cities[i];
+      
+  
+    let cityText = document.createTextNode(searchCityItem);
+    let cityContainer = document.getElementById("cityBox");
+    let searchCityDiv = document.createElement('div');
+    let searchCityHeader = document.createElement("h1");
+    
+    searchCityDiv.id = searchCityItem;
+    searchCityHeader.id = "headerId"
+    
+    searchCityHeader.appendChild(cityText)
+    cityContainer.appendChild(searchCityDiv);
+    searchCityDiv.appendChild(searchCityHeader)
+  }
+  
+  
+  
+  function accessWeatherData(data) {
+    
+    // getting Temperature data ~for the day~ and display on top card
  let tempValue = data.current.temp 
  let tempText = document.createTextNode(tempValue)
  let addTempToDiv = selectedCityEl[0].appendChild(selectedCityTempEl)
