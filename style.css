@@ -1,0 +1,18 @@
+.card-week {
+    background-color: #03b6fc;
+    font-weight: bold;
+}
+
+#clear {
+    margin-left: 5%;
+    margin-top: 10%;
+    border-radius: 10%;
+    background-color: white;
+    color: lightseagreen;
+    border-color: lightseagreen;
+}
+
+.searchCityItem {
+    width: 100%;
+    display: block;
+}

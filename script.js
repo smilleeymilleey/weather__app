@@ -87,16 +87,19 @@ async function getWeeklyForecast(lat, lon){
   
     let cityText = document.createTextNode(searchCityItem);
     let cityContainer = document.getElementById("cityBox");
-    let searchCityDiv = document.createElement('div');
+    let searchCityDiv = document.createElement('button');
     let searchCityHeader = document.createElement("h1");
     
-    searchCityDiv.id = searchCityItem;
+    searchCityDiv.className = "searchCityItem";
     searchCityHeader.id = "headerId"
     
     searchCityHeader.appendChild(cityText)
     cityContainer.appendChild(searchCityDiv);
     searchCityDiv.appendChild(searchCityHeader)
   }
+
+
+
   
   
   
