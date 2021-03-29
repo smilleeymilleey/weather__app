@@ -105,26 +105,17 @@ function accessWeatherData(data) {
 
   for (let i = 0; i < 5; i++) {
     let forecastTempValue = data.daily[i].temp.day;
-
-  
-
     let unixTimeStamp = data.daily[i].dt;
     let date = new Date(unixTimeStamp * 1000);
-
-    console.log(date)
-
-
-
-
-    
-    let tempEl = document.getElementById("card");
-    let tempPlace = document.createElement("p");
-    let newTempEl= tempEl.appendChild(tempPlace);
-    let weeklyTempText = document.createTextNode(forecastTempValue);
+    let humidity = data.daily[i].humidity;
 
     let cardDate = document.getElementsByClassName("card-title")[i];
     let cardTemp = document.getElementsByClassName("card-temp")[i];
     let cardHumidity = document.getElementsByClassName("card-text")[i];
+
+    cardDate.textContent = date;
+    cardTemp.textContent = "Temp(F): " + forecastTempValue;
+    cardHumidity.textContent = "Humidity: " + humidity;
 
 
 
