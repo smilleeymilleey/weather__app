@@ -24,10 +24,9 @@ async function getWeatherData(city){
     return response.json();
   })
   .then(function (data) {
-    accessWeatherData(data);
     let lat = data.city.coord.lat
     let lon = data.city.coord.lon
-
+    
     console.log('weather!!');
     console.log(data);
     
@@ -37,16 +36,17 @@ async function getWeatherData(city){
 // api to get weekly forecast is located below
 
 async function getWeeklyForecast(lat, lon){
-  const url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
-
+  const url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + apiKey;
+  
   fetch(url)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     
-      console.log('weekly forecast');
-      console.log(data);
+    console.log('weekly forecast');
+    console.log(data);
+    accessWeatherData(data);
     });
 }
 // click event for search bar 
@@ -78,14 +78,14 @@ function getSearchBarValue(event) {
 
 function accessWeatherData(data) {
   // getting name data and displaying 
- let nameValue = data.city.name 
- let nameText = document.createTextNode(nameValue)
- let addHeaderToDiv = selectedCityEl[0].appendChild(selectedCityNameEl)
+// //  let nameValue = data.city.name 
+//  let nameText = document.createTextNode(nameValue)
+//  let addHeaderToDiv = selectedCityEl[0].appendChild(selectedCityNameEl)
   
- addHeaderToDiv.appendChild(nameText);
+//  addHeaderToDiv.appendChild(nameText);
 
   // getting Temperature data ~for the day~ and displaying 
- let tempValue = data.list[0].main.temp 
+ let tempValue = data.current.temp 
  let tempText = document.createTextNode(tempValue)
  let addTempToDiv = selectedCityEl[0].appendChild(selectedCityTempEl)
 
@@ -93,7 +93,7 @@ function accessWeatherData(data) {
 
   // getting wind speed ~for the day~ and displaying 
 
- let windValue = data.list[0].wind.speed
+ let windValue = data.current.wind_speed
  let windText = document.createTextNode(windValue)
  let addWindToDiv = selectedCityEl[0].appendChild(selectedCityWindEl)
   
@@ -103,13 +103,37 @@ function accessWeatherData(data) {
 
   // looping through the api for list 
 
-  for (let i = 0; i < 40; i++) {
-    const list = data.list[i];
-    console.log(JSON.parse(JSON.stringify(list)));
+  for (let i = 0; i < 5; i++) {
+    let forecastTempValue = data.daily[i].temp.day;
+
+  
+
+    let unixTimeStamp = data.daily[i].dt;
+    let date = new Date(unixTimeStamp * 1000);
+
+    console.log(date)
+
+
+
+
+    
+    let tempEl = document.getElementById("card");
+    let tempPlace = document.createElement("p");
+    let newTempEl= tempEl.appendChild(tempPlace);
+    let weeklyTempText = document.createTextNode(forecastTempValue);
+
+    let cardDate = document.getElementsByClassName("card-title")[i];
+    let cardTemp = document.getElementsByClassName("card-temp")[i];
+    let cardHumidity = document.getElementsByClassName("card-text")[i];
+
+
+
+
+
+    console.log(cardHumidity);
+
+  
   }
-
-
-
  
 }
 
