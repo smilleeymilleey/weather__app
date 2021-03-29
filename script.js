@@ -100,7 +100,9 @@ function accessWeatherData(data) {
   addWindToDiv.appendChild(windText)
 
   //getting UV Index ~for that day~ and displaying 
-
+    let uv = data.current.uvi;
+    let uvText = document.createTextNode(uv)
+    selectedCityUvEl.appendChild(uvText);
   // looping through the api for list 
 
   for (let i = 0; i < 5; i++) {
