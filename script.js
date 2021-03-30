@@ -60,7 +60,7 @@ async function getWeeklyForecast(lat, lon){
     event.preventDefault();
     let searchCityItem = document.getElementById("search").value;
     let cityText = document.createTextNode(searchCityItem);
-    let searchCityDiv = document.createElement('div');
+    let searchCityDiv = document.createElement('button');
     let searchCityHeader = document.createElement("h1");
     let cityContainer = document.getElementById("cityBox");
     
@@ -78,13 +78,13 @@ async function getWeeklyForecast(lat, lon){
     getWeatherData(searchCityItem);
   }
   
-
+  // save cities from search to a list from local storage
 
   let cities = JSON.parse(localStorage.getItem("city")) || [];
   for (let i = 0; i < cities.length; i++) {
+    
     const searchCityItem = cities[i];
-      
-  
+    
     let cityText = document.createTextNode(searchCityItem);
     let cityContainer = document.getElementById("cityBox");
     let searchCityDiv = document.createElement('button');
@@ -96,12 +96,16 @@ async function getWeeklyForecast(lat, lon){
     searchCityHeader.appendChild(cityText)
     cityContainer.appendChild(searchCityDiv);
     searchCityDiv.appendChild(searchCityHeader)
+    
+    // clear list from local storage
+    let clear = document.getElementById("clear")
+    clear.addEventListener("click", clearCityList)
+    
+    function clearCityList() {
+      window.localStorage.removeItem("city");
+      window.location.reload(false);
+    }
   }
-
-
-
-  
-  
   
   function accessWeatherData(data) {
     
