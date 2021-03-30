@@ -17,6 +17,12 @@
 }
 
 .searchCityItem {
+    display: block;
+    width: 100%;
+}
+
+.searchCityDiv {
     width: 100%;
     display: block;
+
 }

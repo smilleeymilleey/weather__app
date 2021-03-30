@@ -103,7 +103,7 @@ async function getWeeklyForecast(lat, lon){
     
     function clearCityList() {
       window.localStorage.removeItem("city");
-      window.location.reload(false);
+      location.reload(false);
     }
   }
   
