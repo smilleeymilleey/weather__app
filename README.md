@@ -1,5 +1,5 @@
 
-# agenda
+# Weather App
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -64,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Agenda Planner
+Weather App
 
 <img src="./weatherapp.jpg">
 
