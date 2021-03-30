@@ -55,6 +55,7 @@ async function getWeeklyForecast(lat, lon){
   console.log(form)
   
   
+
   
   function getSearchBarValue(event) {
     event.preventDefault();
@@ -79,10 +80,9 @@ async function getWeeklyForecast(lat, lon){
   }
   
   // save cities from search to a list from local storage
-
+  
   let cities = JSON.parse(localStorage.getItem("city")) || [];
   for (let i = 0; i < cities.length; i++) {
-    
     const searchCityItem = cities[i];
     
     let cityText = document.createTextNode(searchCityItem);
@@ -96,6 +96,13 @@ async function getWeeklyForecast(lat, lon){
     searchCityHeader.appendChild(cityText)
     cityContainer.appendChild(searchCityDiv);
     searchCityDiv.appendChild(searchCityHeader)
+
+    // let topCardNameSpot = document.createElement("h1")
+    // selectedCityNameEl.appendChild(topCardNameSpot)
+    // topCardNameSpot.appendChild(cityText);
+
+    
+    
     
     // clear list from local storage
     let clear = document.getElementById("clear")
@@ -107,9 +114,10 @@ async function getWeeklyForecast(lat, lon){
     }
   }
   
-  function accessWeatherData(data) {
+  
+function accessWeatherData(data) {
     
-    // getting Temperature data ~for the day~ and display on top card
+// getting Temperature data ~for the day~ and display on top card
  let tempValue = data.current.temp 
  let tempText = document.createTextNode(tempValue)
  let addTempToDiv = selectedCityEl[0].appendChild(selectedCityTempEl)
@@ -117,7 +125,6 @@ async function getWeeklyForecast(lat, lon){
   addTempToDiv.appendChild(tempText)
 
 // getting wind speed ~for the day~ and display on top card
-
  let windValue = data.current.wind_speed
  let windText = document.createTextNode(windValue)
  let addWindToDiv = selectedCityEl[0].appendChild(selectedCityWindEl)
@@ -125,15 +132,24 @@ async function getWeeklyForecast(lat, lon){
   addWindToDiv.appendChild(windText)
 
 //getting UV Index ~for that day~ and display on top card
+ let uv = data.current.uvi;
+ let uvText = document.createTextNode(uv)
 
-    let uv = data.current.uvi;
-    let uvText = document.createTextNode(uv)
-    selectedCityUvEl.appendChild(uvText);
+  selectedCityUvEl.appendChild(uvText);
+ 
+  if(uv <= 2){
+    selectedCityUvEl.style.color = "lightgreen";
+  } else if (uv >= 3 && uv <= 5){
+    selectedCityUvEl.style.color = "darkyellow";
+  } else {
+    selectedCityUvEl.style.color = "red";
+  }
 
+  console.log(uv)
 
 // looping through the api to list and display the current day, time, temperature, and humidity for the weekly forcast 
 
-  for (let i = 0; i < 5; i++) {
+  for(let i = 0; i < 5; i++) {
     let forecastTempValue = data.daily[i].temp.day;
     let unixTimeStamp = data.daily[i].dt;
     let date = new Date(unixTimeStamp * 1000);
