@@ -66,7 +66,7 @@
 
 Agenda Planner
 
-<img src="./agendascreenshot.jpg">
+<img src="./weatherapp.jpg">
 
  I want to create a weather app so amazing that it'll be the only one you ever need -- I think this is it.
 
