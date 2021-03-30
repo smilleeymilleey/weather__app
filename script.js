@@ -145,7 +145,7 @@ function accessWeatherData(data) {
     selectedCityUvEl.style.color = "red";
   }
 
-  console.log(uv)
+
 
 // looping through the api to list and display the current day, time, temperature, and humidity for the weekly forcast 
 
